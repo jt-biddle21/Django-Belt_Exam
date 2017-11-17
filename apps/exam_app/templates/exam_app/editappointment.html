@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit User</title>
+    </head>
+    <body>
+        <h2>Edit Your Information!</h2>
+        {% for e in task %}
+        <form action="/users/{{e.id}}/doneedit" method="post">
+            {% csrf_token %}
+            <h4>Edit Info For User {{ e.id }}</h4>
+            <label id="editfname">First Name: <input type="text" name="newfname" value="{{ e.fname }}"></label><br><br>
+            <label id="editlname">Last Name: <input type="text" name="newlname" value="{{ e.lname }}"></label><br><br>
+            <label id="editemail">Email: <input type="text" name="newemail" value="{{ e.email }}"></label><br><br>
+            <label id="editsub"><input type="submit" value="SUBMIT EDITS"></label>
+        </form>
+        {% endfor %}
+    </body>
+</html>

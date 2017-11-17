@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Appointments</title>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <h2>Welcome to the Appointments homepage!</h2>
+        <h4>To begin, login, or register is you haven't already!</h4>
+        <form id="regform" action="/register" method="POST">
+            {% csrf_token %}
+            <p><label for="name">Name: <input id="name" type="text" name="name"></label></p>
+            <p><label for="email">Email: <input id="email" type="text" name="email"></label></p>
+            <p><label for="pass">Password: <input id="pass" type="password" name="password"></label></p>
+            <p>**Password should be at least 8 characters**</p>
+            <p><label for="conf">Confirm Password: <input id="conf" type="password" name="confirmpw"></label></p>
+            <p><label for="dob">Date of Birth: <input id="dob" type="date" name="date"></label></p>
+            <input type="submit" value="Register">
+        </form>
+        <h5>If you already registered, log in here!</h5>
+        <form id="loginform" action='/login' method='post'>
+            {% csrf_token %}
+            <label for="logem">Email: <input id="logem" type="text" name="Logemail"></label>
+            <label for="logpass">Password: <input id="logpass" type="password" name="Logpassword"></label>
+            <input type="submit" value="Log In">
+        </form>
+    </body>
+</html>

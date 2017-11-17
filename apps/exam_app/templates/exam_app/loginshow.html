@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Account</title>
+    </head>
+    <body>
+        <p>Use login asd@asd.com password 123123123 / to see an account w/ appointments</p>
+        {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <a href="/logout">Log Out</a>
+        {% for x in username %}
+        <p>Welcome {{ x.name }}! Today is {{ time }}</p>
+        {% endfor %}
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for z in task %}
+            <tr>
+                <td>{{z.taskname}}</td>
+                <td>{{z.taskdate.time }}</td>
+                <td>{{z.taskstatus}}</td>
+                <td><a href="/task/{{z.id}}/edit">Edit</a> | <a href="/task/{{z.id}}/delete">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>Add Appointment</h3>
+        <form action="/addappointment/{{ request.session.user_id }}/add" method="post">
+            {% csrf_token %}
+            <label id="apdate">Date: <input type="date" name="addDate"></label><br>
+            <label id="aptime">Time: <input type="time" name="addTime"></label><br>
+            <label id="aptask">Task: <input type="text" name="addtask"></label>
+            <input type="submit" value="Add">
+        </form>
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+            {% for y in newappoint %}
+            <tr>
+                <td>{{y.newtaskname}}</td>
+                <td>{{y.newtaskdate.time }}</td>
+                <td>{{y.newtasktime}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

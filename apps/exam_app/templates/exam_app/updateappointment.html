@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Update Appointment</title>
+    </head>
+    <body>
+        <a href="/loggedin">Go Back</a>
+        <h2>Edit Your Information!</h2>
+        {% for e in editappointment %}
+        <form action="/task/{{e.id}}/doneupdate" method="post">
+            {% csrf_token %}
+            <h4>Edit Info For Appointment {{ e.id }}</h4>
+            <label id="edittask">Task: <input type="text" name="newtask" value="{{ e.taskname }}"></label><br><br>
+            <label id="status">Status:
+                <select name="newstatus">
+                    <option value='Pending'>Pending</option>
+                    <option value='Done'>Done</option>
+                    <option value='missed'>Missed</option>
+                </select></label>
+            <label id="apdate">Date: <input type="date" name="newdate"></label><br>
+            <label id="aptime">Time: <input type="time" name="newtime"></label><br>
+            <label id="editsub"><input type="submit" value="Update"></label>
+        </form>
+        {% endfor %}
+    </body>
+</html>
